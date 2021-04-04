@@ -35,6 +35,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -42,7 +43,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       dataLogin: {
         email: "",
         password: ""
-      }
+      },
+      error: ''
     };
   },
   methods: {
@@ -61,7 +63,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 res = _context.sent;
 
-                if (res.status === 200) {
+                if (res.data.error === 0) {
                   _this.$store.commit("setAuthenticated", {
                     userData: res.data.data,
                     isAuthenticated: true,
@@ -69,6 +71,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
 
                   _this.$router.go();
+                } else {
+                  _this.error = res.data.message;
                 }
 
               case 4:
@@ -282,6 +286,12 @@ var render = function() {
       },
       [
         _c("h1", { staticClass: "text-center" }, [_vm._v("Login")]),
+        _vm._v(" "),
+        _vm.error !== ""
+          ? _c("p", { staticClass: "text-danger text-center" }, [
+              _vm._v(_vm._s(_vm.error))
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c("input", {
           directives: [

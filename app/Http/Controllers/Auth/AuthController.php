@@ -12,7 +12,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-     /**
+    /**
      * Create a new AuthController instance.
      *
      * @return void
@@ -31,13 +31,17 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-
-        if ($token = $this->guard()->attempt($credentials)) {
-            $user = JWTAuth::setToken($token)->toUser();
-            return $this->respondWithToken($token, $user);
+        $user = User::where('email', $request->input('email'))->first();
+        if ($user) {
+            $credentials = $request->only('email', 'password');
+            if ($token = $this->guard()->attempt($credentials)) {
+                $user = JWTAuth::setToken($token)->toUser();
+                return $this->respondWithToken($token, $user);
+            }
+            return BaseResult::error(401, 'Wrong password');
+        } else {
+            return BaseResult::error(401, 'Email not exists');
         }
-        return response()->json(['error' => 'Unauthorized'], 401);
     }
 
     /**
@@ -85,6 +89,7 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'data' => $user,
+            'error' => 0,
             'expires_in' => $this->guard()->factory()->getTTL() * 60
         ]);
     }
@@ -98,7 +103,8 @@ class AuthController extends Controller
     {
         return Auth::guard();
     }
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
         $email = $request->input('email');
         $password = $request->input('password');
         $user = new User();

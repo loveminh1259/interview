@@ -25,8 +25,9 @@ class UserController extends Controller
     }
     public function get($id = null)
     {
+        $currentUser = Auth::user();
         if ($id == null) {
-            $users = User::all();
+            $users = User::where('USE_ID', '!=', $currentUser->USE_ID)->get();
             return BaseResult::withData($users);
         } else {
             $user = User::find($id);
