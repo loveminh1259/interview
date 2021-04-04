@@ -165,6 +165,11 @@ export default {
       });
     },
     showForm(id = 0) {
+      this.form.email = ''
+      this.form.password = ''
+      this.form.name = ''
+      this.form.permissions = []
+      this.form.USE_ID = 0
       this.visible = true;
       this.USE_ID = id;
       if (id > 0) {

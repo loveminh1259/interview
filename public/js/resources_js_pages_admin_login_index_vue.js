@@ -41,8 +41,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       dataLogin: {
-        email: "",
-        password: ""
+        email: "admin@gmail.com",
+        password: "admin"
       },
       error: ''
     };

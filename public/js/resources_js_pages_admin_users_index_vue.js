@@ -289,6 +289,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     showForm: function showForm() {
       var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      this.form.email = '';
+      this.form.password = '';
+      this.form.name = '';
+      this.form.permissions = [];
+      this.form.USE_ID = 0;
       this.visible = true;
       this.USE_ID = id;
 

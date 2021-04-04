@@ -19,7 +19,7 @@ import authService from "../../../services/api/auth";
 export default {
   data() {
     return {
-      dataLogin: { email: "", password: "" },
+      dataLogin: { email: "admin@gmail.com", password: "admin" },
       error: ''
     };
   },

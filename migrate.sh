@@ -1,2 +1,2 @@
 #!/bin/sh
-php-fpm  | composer install| php artisan db:seed  | npm install
+php-fpm | php artisan db:seed
