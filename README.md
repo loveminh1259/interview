@@ -10,3 +10,5 @@ If you not use docker, you can config the project in .env file
 - The admin user:
 + Email: admin@gmail.com
 + Password: admin
+###Database
+- Diagram and database generation sql is in db folder
